@@ -11,4 +11,7 @@ function printTime()
 
     const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
     console.log(`Current time: ${hours}:${formattedMinutes}:${seconds}`);
+    setTimeout(printTime, 1000);
 }
+
+printTime(); 

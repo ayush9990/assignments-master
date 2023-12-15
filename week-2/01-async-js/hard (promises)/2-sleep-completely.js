@@ -4,5 +4,13 @@
  */
 
 function sleep (seconds) {
-
+    const start = Date.now();
+    while (Date.now() - start < seconds) {
+    // Empty loop to waste time
+    }
+    return new Promise(function(resolve){
+        resolve();
+    })
 }
+
+module.exports = sleep;
