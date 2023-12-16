@@ -40,10 +40,89 @@
   Testing the server - run `npm run test-todoServer` command in terminal
  */
   const express = require('express');
+  const fs = require('fs');
   const bodyParser = require('body-parser');
-  
   const app = express();
-  
   app.use(bodyParser.json());
-  
+
+  // const jsonData = fs.readFileSync('./todos.json', 'utf8')
+  // let myJson = JSON.parse(jsonData)
+  let myJson = [];
+  let uniqueId = 2
+
+  app.get('/todos', (req, res) => {
+    console.log(req.body)
+    res.status(200).json(myJson)
+  })
+
+  app.get('/todos/:id', (req, res) => {
+    const todoId = req.params.id ;
+    //console.log(req.body)
+    console.log(myJson);
+    
+    let result = myJson.filter( todoitem => {
+      return (todoitem.id.toString() == todoId)});
+
+    if (result.length == 0){
+      res.status(404).send("Not found");
+    }
+    else{
+      res.status(200).json(result[0]);
+    }
+  })
+
+  app.post('/todos', (req, res) => {
+    console.log("post request")
+    console.log(req.body)
+
+    let newTodo = req.body;
+    newTodo.id = uniqueId;
+    myJson.push(newTodo);
+    uniqueId = uniqueId + 1
+
+    res.status(201).json({
+      id : newTodo.id
+    })
+  })
+
+  app.put('/todos/:id', (req, res) => {
+    console.log(req.body)
+    const todoId = req.params.id ;
+
+    res.json({})
+  })
+
+  app.delete('/todos/:id', (req, res) => {
+    console.log("delete request")
+    const todoId = req.params.id ;
+    //console.log(req.body)
+    console.log(myJson);
+    
+    let result = myJson.filter( todoitem => {
+      return (todoitem.id.toString() == todoId)});
+
+    if (result.length == 0){
+      res.status(404).send("Not found");
+    }
+    else{
+      //console.log("reached here")
+      result = myJson.filter( todoitem => {
+        return (todoitem.id.toString() != todoId)});
+      myJson = result ;
+      res.status(200).send("Found and deleted");
+    }
+  })
+
+  app.all('*', (req, res) => {
+    console.log(req.body)
+    res.status(404).send("not found")
+  })
+
+  // app.listen(3000, () => {
+  //   console.log(`Example app listening on port 3000`)
+  // })
+
+
+
+
   module.exports = app;
