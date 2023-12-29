@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://ayush9990:ul5kNZ1iCNDbgyeo@cluster0.cuceysl.mongodb.net/userappnew');
+require("dotenv").config()
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URL);
 
 const User = mongoose.model('Users', { name: String , email: String, password: String});
 
