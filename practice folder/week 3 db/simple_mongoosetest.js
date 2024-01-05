@@ -21,7 +21,28 @@ async function queryAndDisplayResults() {
   }
 }
 
-queryAndDisplayResults();
+async function queryAndDisplaySearchResults() {
+  try {
+    const results = await User.find({name : 'Ayush Jiw', email: "ayush9990@gmail.com"});
+    console.log('search records:', results);
+    console.log(results.length)
+    if (results.length > 0){
+    console.log(results[0]._id.toString());
+    }
+    else{
+      console.log('no results found');
+    }
+
+    // Do something with the results, such as display them in a web page or API response
+  } catch (err) {
+    console.error('Error:', err);
+  } finally {
+    await mongoose.connection.close();
+  }
+}
+
+//queryAndDisplayResults();
+queryAndDisplaySearchResults();
 
 // const user = new User({ 
 //     name: 'Ayush Jiw',
