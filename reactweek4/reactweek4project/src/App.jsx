@@ -1,47 +1,28 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 
 function App() {
-  const [todos, setTodos] = useState([{
-    title: "Go to gym",
-    description: "Go to gym from 7-9",
-    completed: false
-  }, {
-    title: "Study DSA",
-    description: "Study DSA form 9-100",
-    completed: true
-  }, {
-    title: "Study DSA",
-    description: "Study DSA form 9-100",
-    completed: true
-  } ]); 
-
-  function addTodo() {
-    // [1, 2]
-    // [...todos, 3] => [1, 2, 3]
-    setTodos([...todos, {
-      title: "new Todo",
-      description: "desc of new todo"
-    }])
-  }
 
   return (
-    <div>
-      <button onClick={addTodo}>Add a random todo</button>
-      {todos.map(function(todo) {
-        return <Todo title={todo.title} description={todo.description} />
-      })}
-
+    <div style={{display: "flex"}}>
+      <Card>
+        hi there
+      </Card>
+      <Card>
+        <div>
+          hello from the 2nd card
+        </div>
+      </Card>
     </div>
   )
 }
 
-function Todo(props) {
-  return <div>
-    <h1>{props.title}</h1>
-    <h2>{props.description}</h2>
+function Card({children}) {
+  return <div style={{
+    border: "1px solid black",
+    padding: 10,
+    margin: 10
+  }}>
+    {children}
   </div>
 }
 

@@ -1,9 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-app.use(bodyParser.json());
+const cors = require("cors");
 const { createTodo,updateTodo } = require('./types');   
 const {todos} = require('./db')
+
+app.use(bodyParser.json());
+app.use(cors());
  
 
 app.post('/todos', async (req, res) => {
