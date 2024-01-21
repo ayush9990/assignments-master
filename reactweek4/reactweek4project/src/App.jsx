@@ -2,8 +2,10 @@ import { useState } from 'react'
 
 function App() {
 
+  const [count,setCount] = useState(0);
+
   return (
-    <div style={{display: "flex"}}>
+    <div>
       <Card>
         hi there
       </Card>
@@ -11,6 +13,11 @@ function App() {
         <div>
           hello from the 2nd card
         </div>
+      </Card>
+      <Card>
+        <button onClick={function(){
+          setCount(count + 2);
+        }}>Count is {count}</button>
       </Card>
     </div>
   )
